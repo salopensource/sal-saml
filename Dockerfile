@@ -1,4 +1,4 @@
-FROM macadmins/sal:latest
+FROM macadmins/sal:2.7.1
 MAINTAINER Graham Gilbert <graham@grahamgilbert.com>
 ENV DJANGO_SAML_VERSION 0.14.4
 
@@ -9,4 +9,3 @@ RUN apt-get update && apt-get install -y python-setuptools python-dev libxmlsec1
 ADD attributemaps /home/app/sal/sal/attributemaps
 RUN mv /home/app/sal/sal/urls.py /home/app/sal/sal/origurls.py
 ADD urls.py /home/app/sal/sal/urls.py
-
