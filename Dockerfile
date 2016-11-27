@@ -1,4 +1,4 @@
-FROM macadmins/sal:django1.10
+FROM macadmins/sal:3.0.0b2
 MAINTAINER Graham Gilbert <graham@grahamgilbert.com>
 ENV DJANGO_SAML_VERSION 0.14.4
 
