@@ -1,4 +1,4 @@
-FROM macadmins/sal:3.0.4
+FROM macadmins/sal:3.0.5
 MAINTAINER Graham Gilbert <graham@grahamgilbert.com>
 ENV DJANGO_SAML_VERSION 0.14.4
 
