@@ -1,6 +1,6 @@
 # Django settings for Sal project.
 from system_settings import *
-from settings_import import ADMINS, TIME_ZONE, LANGUAGE_CODE, ALLOWED_HOSTS, DISPLAY_NAME, DEFAULT_MACHINE_GROUP_KEY,DEBUG, BRUTE_PROTECT, BRUTE_COOLOFF, BRUTE_LIMIT
+from settings_import import ADMINS, TIME_ZONE, LANGUAGE_CODE, ALLOWED_HOSTS, DISPLAY_NAME, DEFAULT_MACHINE_GROUP_KEY,DEBUG, BRUTE_COOLOFF, BRUTE_LIMIT
 from os import path
 import saml2
 from saml2.saml import NAMEID_FORMAT_PERSISTENT
