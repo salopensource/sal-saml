@@ -73,7 +73,6 @@ Okta has a slightly different implementation and a few of the tools that this co
     Use this for Recipient URL and Destination URL: **Checked**  
     Allow this app to request other SSO URLs: **Unchecked** (If this option is available)  
     Audience URI (SP Entity ID): **https://sal.example.com/saml2/metadata/**  
-    Default RelayState:  
     Default RelayState: **Unspecified**  
     Application username: **Okta username**  
 
@@ -89,14 +88,18 @@ Okta has a slightly different implementation and a few of the tools that this co
     #### Group Attribute Statements
 
     Sal does not support these at this time.
-
 1. Under "Feedback":
 
     Are you a customer or partner? I'm an Okta customer adding an internal app  
     App type: This is an internal app that we have created  
 
-Now that Okta is setup you will need to modify your settings.py to match. Note if you used the Attribute Statements above you should not have to modify the `SAML_ATTRIBUTE_MAPPING` variable. The metadata file can be downloaded from the Application's "Sign On" tab > Settings > SAML 2.0 > "Identity Provider metadata" link. The `idp` URLs are found under the "Sign On" > Settings > SAML 2.0 > "View Setup Instructions" button.
+1. Download the metadata file from: "Sign On" tab > Settings > SAML 2.0 > "Identity Provider metadata" link
+    * Rename the file to `metadata.xml` to match the docker run example. Make sure to move this file to the correct location on your docker host.
+
+1. Under "Sign On" tab > Settings > SAML 2.0 > "View Setup Instructions", you will find the "Identity Provider Single Sign-On URL" and "Identity Provider Issuer" which will go into the `settings.py` > `idp` section.
+
 
 # Help
 
-For more information on what to put in your settings.py, look at https://github.com/knaperek/djangosaml2
+For more information on what to put in your settings.py, look at https://github.com/knaperek/djangosaml2  
+Also, swing by the #sal channel on the MacAdmins slack team (https://macadmins.org/) 
