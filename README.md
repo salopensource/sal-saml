@@ -19,7 +19,7 @@ _The following instructions are provided as a best effort to help get started. T
 
 ## An example Docker run
 
-Please note that this docker run is **incomplete**, but shows where to pass the `metadata.xml` and `settings.py`
+Please note that this docker run is **incomplete**, but shows where to pass the `metadata.xml` and `settings.py`. Also note, `latest` in the below run should not be used unless you have a real reason (needing a development version). When performing `docker run`, you should substitute `latest` for the latest tagged release.
 
 ```bash
 docker run -d --name="sal" \
