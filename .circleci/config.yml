@@ -1,0 +1,21 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: docker:17.05.0-ce-git
+
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run: apk update
+      - run: apk add python2
+      - run: python generate_dockerfile.py
+      - run: docker build -t macadmins/sal-saml:$TAG .
+      - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
+      - run: docker push macadmins/sal-saml:$TAG
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
