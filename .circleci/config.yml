@@ -9,7 +9,7 @@ jobs:
       - setup_remote_docker
       - run: apk update
       - run: apk add python2
-      - run: python generate_dockerfile.py
+      - run: python generate_dockerfile.py $TAG
       - run: docker build -t macadmins/sal-saml:$TAG .
       - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
       - run: docker push macadmins/sal-saml:$TAG
