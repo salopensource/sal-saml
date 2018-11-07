@@ -9,8 +9,8 @@ jobs:
       - setup_remote_docker
       - run: apk update
       - run: apk add python2
-      - run: if [ -z ${TAG+x} ]; then TAG=$CIRCLE_BRANCH; fi; if [ $TAG=="master" ]; then TAG="latest"; fi; echo export TAG=$TAG >> $BASH_ENV; source $BASH_ENV; echo $BASH_ENV
-      - run: cat $BASH_ENV; python generate_dockerfile.py $TAG
+      - run: if [ -z ${TAG+x} ]; then TAG=$CIRCLE_BRANCH; fi; if [ $TAG=="master" ]; then TAG="latest"; fi; echo export TAG=\"$TAG\" >> $BASH_ENV; source $BASH_ENV; echo $BASH_ENV
+      - run: python generate_dockerfile.py $TAG
       - run: docker build -t macadmins/sal-saml:$TAG .
       - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
       - run: docker push macadmins/sal-saml:$TAG
