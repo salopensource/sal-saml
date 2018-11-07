@@ -12,7 +12,14 @@ jobs:
       - run: python generate_dockerfile.py $TAG
       - run: docker build -t macadmins/sal-saml:$TAG .
       - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
-      - run: docker push macadmins/sal-saml:$TAG
+      - run: |
+        if [ -z ${TAG+x} ];
+        then TAG=$CIRCLE_BRANCH;
+        fi
+        if [ $TAG=="master" ];
+        then TAG="latest";
+        fi
+        docker push macadmins/sal-saml:$TAG
 
 workflows:
   version: 2
