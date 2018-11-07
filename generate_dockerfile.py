@@ -1,6 +1,7 @@
 import argparse
+import os
 parser = argparse.ArgumentParser()
-
+print os.environ['tag']
 parser.add_argument('tag')
 args = parser.parse_args()
 dockerfile_content = """FROM macadmins/sal:{}
