@@ -47,10 +47,13 @@ cmd = [
     '-u',
     '{}'.format(os.getenv('DOCKER_USER')),
     '-p',
-    '{}'.format(os.getenv('DOCKER_pass'))
+    '{}'.format(os.getenv('DOCKER_PASS'))
 ]
 
-print subprocess.check_output(cmd)
+try:
+    print subprocess.check_output(cmd)
+except subprocess.CalledProcessError:
+    print 'Failed to login to docker'
 
 cmd = [
     'docker',
