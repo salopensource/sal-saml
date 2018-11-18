@@ -3,11 +3,11 @@ import subprocess
 import os
 
 
-parser = argparse.ArgumentParser()
-parser.add_argument('tag', nargs='?', default='')
-args = parser.parse_args()
+# parser = argparse.ArgumentParser()
+# parser.add_argument('tag', nargs='?', default='')
+# args = parser.parse_args()
 
-tag = args.tag
+tag = os.getenv('TAG', '')
 
 if tag == '':
     if os.getenv('CIRCLE_BRANCH') == 'master':
