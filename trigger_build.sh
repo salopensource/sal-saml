@@ -1,14 +1,21 @@
+#!/bin/bash
 source SAL_ENVS
 
 if [ "$1" != "" ]; then
-    BRANCH="$1"
+    TAG="$1"
+else
+    TAG="latest"
+fi
+
+if [ "$2" != "" ]; then
+    BRANCH="$2"
 else
     BRANCH="master"
 fi
 
 URL="https://circleci.com/api/v1.1/project/github/salopensource/sal-saml/tree/${BRANCH}"
-
-jq -n '{TAG: "latest"}' | curl -X POST -d @- \
+echo $TAG
+jq -n '{build_parameters: {TAG: "$TAG"}}' | curl -X POST -d @- \
   --user ${CIRCLE_API_USER_TOKEN}: \
   --url $URL \
   -H 'Content-Type: application/json' \
