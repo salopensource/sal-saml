@@ -4,7 +4,7 @@ import os
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument('tag')
+parser.add_argument('tag', default='')
 args = parser.parse_args()
 
 tag = args.tag
