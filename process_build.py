@@ -35,7 +35,8 @@ cmd = [
     'docker',
     'build',
     '-t',
-    'macadmins/sal-saml:{}'.format(tag)
+    'macadmins/sal-saml:{}'.format(tag),
+    '.'
 ]
 
 print subprocess.check_output(cmd)
