@@ -1,6 +1,6 @@
 # Django settings for Sal project.
-from system_settings import *
-from settings_import import *
+from sal.system_settings import *
+from sal.settings_import import *
 from os import path
 import saml2
 from saml2.saml import NAMEID_FORMAT_PERSISTENT
