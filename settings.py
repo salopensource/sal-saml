@@ -95,6 +95,7 @@ SAML_CONFIG = {
   'attribute_map_dir': path.join(BASEDIR, 'attributemaps'),
 
   # this block states what services we provide
+  'allow_unknown_attributes': True,
   'service': {
       # we are just a lonely SP
       'sp' : {

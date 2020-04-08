@@ -61,20 +61,20 @@ macadmins/sal-saml:latest
 Okta has a slightly different implementation and a few of the tools that this container uses, specifically [`pysaml2`](https://github.com/rohe/pysaml2) and [`djangosaml2`](https://github.com/knaperek/djangosaml2), do not like this implementation by default. Please follow the setup instructions, make sure to replace the example URL:
 1. Create a new app from the admin portal
 
-    Platform: Web  
-    Sign on method: SAML 2.0  
+    Platform: Web
+    Sign on method: SAML 2.0
 
 1. Under "General Settings", give the app a name, add a logo and modify app visibility as desired.
 1. Under "Configure SAML" enter the following (if no value is given after the colon leave it blank):
 
     #### General
 
-    Single sign on URL: **https://sal.example.com/saml2/acs/**  
-    Use this for Recipient URL and Destination URL: **Checked**  
-    Allow this app to request other SSO URLs: **Unchecked** (If this option is available)  
-    Audience URI (SP Entity ID): **https://sal.example.com/saml2/metadata/**  
-    Default RelayState: **Unspecified**  
-    Application username: **Okta username**  
+    Single sign on URL: **https://sal.example.com/saml2/acs/**
+    Use this for Recipient URL and Destination URL: **Checked**
+    Allow this app to request other SSO URLs: **Unchecked** (If this option is available)
+    Audience URI (SP Entity ID): **https://sal.example.com/saml2/metadata/**
+    Default RelayState: **Unspecified**
+    Application username: **Okta username**
 
     #### Attribute Statements
 
@@ -90,16 +90,40 @@ Okta has a slightly different implementation and a few of the tools that this co
     Sal does not support these at this time.
 1. Under "Feedback":
 
-    Are you a customer or partner? I'm an Okta customer adding an internal app  
-    App type: This is an internal app that we have created  
+    Are you a customer or partner? I'm an Okta customer adding an internal app
+    App type: This is an internal app that we have created
 
 1. Download the metadata file from: "Sign On" tab > Settings > SAML 2.0 > "Identity Provider metadata" link
     * Rename the file to `metadata.xml` to match the docker run example. Make sure to move this file to the correct location on your docker host.
 
 1. Under "Sign On" tab > Settings > SAML 2.0 > "View Setup Instructions", you will find the "Identity Provider Single Sign-On URL" and "Identity Provider Issuer" which will go into the `settings.py` > `idp` section.
 
+## Notes on Google
+1. In the Google admin console click on Apps > SAML Apps.
+1. Click the `+` (plus) button > Setup My Own Custon App.
+1. Under the "Option 1" section, you will find the "SSO URL" which will go into the `settings.py` > `idp` section.
+1. Under the "Option 2" section, download the "IDP metadata" metadata file. This will be mounted in your docker container [(see above)](#an-example-docker-run).
+1. Give the application a display name, upload a icon if you wish, and then click Next.
+1. In the "Service Provider Details" pane, you will need at least the minimum settings shown below:
+    * `ACS (Consumer) URL`: https://sal.example.com/saml2/acs/
+    * `Entity ID`: https://sal.example.com/saml2/metadata/
+    * Set the `Name ID Format` to `EMAIL`
+1. In the "Attribute Mapping" pane, you will need to add the following mappings (NOTE: These match the default mappings in the `settings.py` file, if you changed the attribute mappings, you should use those keys here instead)
+    * Click "Add New Mapping" and fill out the attributes as listed below:
+
+  #### Attribute Mappings
+
+  | **Application Attribute** | **Category** | **User Field**   |
+  |-----------|-----------|-----------|
+  | mail  | Basic Information     | Primary Email  |
+  | uid   | Basic Information     | Primary Email  |
+  | cn    | Basic Information     | First Name     |
+  | sn    | Basic Information     | Last Name      |
+
+1. Click "Finish" to save the new SAML app in Google.
+    * **NOTE**: You will likely need to enable the app for your OUs before you will be able to authenticate in using SAML auth
 
 # Help
 
-For more information on what to put in your settings.py, look at https://github.com/knaperek/djangosaml2  
-Also, swing by the #sal channel on the MacAdmins slack team (https://macadmins.org/) 
+For more information on what to put in your settings.py, look at https://github.com/knaperek/djangosaml2
+Also, swing by the #sal channel on the MacAdmins slack team (https://macadmins.org/)
