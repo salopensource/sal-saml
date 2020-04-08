@@ -1,11 +1,13 @@
-# Django settings for Sal project.
-from sal.system_settings import *
-from sal.settings_import import *
-from os import path
-import saml2
-from saml2.saml import NAMEID_FORMAT_PERSISTENT
 import logging
 import sys
+from os import path
+
+import saml2
+from saml2.saml import NAMEID_FORMAT_PERSISTENT
+
+from sal.system_settings import *
+from sal.settings_import import *
+
 
 SAML_DJANGO_USER_MAIN_ATTRIBUTE = 'email'
 SAML_USE_NAME_ID_AS_USERNAME = True
@@ -17,16 +19,12 @@ SAML_ATTRIBUTE_MAPPING = {
     'sn': ('last_name', ),
 }
 
-if DEBUG == True:
+logging_config = get_sal_logging_config()
+level = 'DEBUG' if DEBUG == True else 'ERROR'
+logging_config['loggers']['djangosaml2'] = {
+    'propagate': False, 'handlers': ['console'], 'level': level}
+update_sal_loggin_config(logging_config)
 
-    root = logging.getLogger()
-    root.setLevel(logging.DEBUG)
-
-    ch = logging.StreamHandler(sys.stdout)
-    ch.setLevel(logging.DEBUG)
-    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    ch.setFormatter(formatter)
-    root.addHandler(ch)
 
 INSTALLED_APPS += ('djangosaml2',)
 
