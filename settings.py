@@ -19,6 +19,15 @@ SAML_ATTRIBUTE_MAPPING = {
     'sn': ('last_name', ),
 }
 
+# Edit these lists to include the names of groups that should get
+# the access levels below. See server/signals.py for more details.
+SAML_READ_ONLY_GROUPS = []
+SAML_READ_WRITE_GROUPS = []
+SAML_GLOBAL_ADMIN_GROUPS = []
+# Edit to match the attribute name used in your SAML assertions for
+# group membership information.
+SAML_GROUPS_ATTRIBUTE = 'memberOf'
+
 logging_config = get_sal_logging_config()
 level = 'DEBUG' if DEBUG == True else 'ERROR'
 logging_config['loggers']['djangosaml2'] = {
