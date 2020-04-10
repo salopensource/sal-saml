@@ -1,5 +1,3 @@
-from typing import Set
-
 from django.dispatch import receiver
 
 from djangosaml2.signals import pre_user_save
