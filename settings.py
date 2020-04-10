@@ -92,8 +92,10 @@ SAML_CONFIG = {
   # directory with attribute mapping
   'attribute_map_dir': path.join(BASEDIR, 'attributemaps'),
 
-  # this block states what services we provide
+  # Allow SAML assertions to contain attributes not specified in the
+  # attributemaps.
   'allow_unknown_attributes': True,
+  # this block states what services we provide
   'service': {
       # we are just a lonely SP
       'sp' : {
@@ -104,7 +106,7 @@ SAML_CONFIG = {
           'name': 'Federated Django sample SP',
           'name_id_format': NAMEID_FORMAT_PERSISTENT,
           'endpoints': {
-              # url and binding to the assetion consumer service view
+              # url and binding to the assertion consumer service view
               # do not change the binding or service name
               'assertion_consumer_service': [
                   ('https://sal.example.com/saml2/acs/',
