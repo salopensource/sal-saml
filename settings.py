@@ -21,6 +21,7 @@ SAML_ATTRIBUTE_MAPPING = {
 
 # Edit these lists to include the names of groups that should get
 # the access levels below. See server/signals.py for more details.
+# Leave blank to disable the group-based permissions feature.
 SAML_READ_ONLY_GROUPS = []
 SAML_READ_WRITE_GROUPS = []
 SAML_GLOBAL_ADMIN_GROUPS = []
