@@ -43,6 +43,7 @@ def update_group_membership(
         instance.userprofile.delete()
         user_profile = UserProfile(user=instance, level=ProfileLevel.global_admin)
         user_profile.save()
+        instance.is_superuser = True
         instance.is_staff = True
         instance.is_active = True
         user_modified = True
@@ -50,6 +51,7 @@ def update_group_membership(
         instance.userprofile.delete()
         user_profile = UserProfile(user=instance, level=ProfileLevel.read_write)
         user_profile.save()
+        instance.is_superuser = False
         instance.is_staff = False
         instance.is_active = True
         user_modified = True
@@ -57,6 +59,7 @@ def update_group_membership(
         instance.userprofile.delete()
         user_profile = UserProfile(user=instance, level=ProfileLevel.read_only)
         user_profile.save()
+        instance.is_superuser = False
         instance.is_staff = False
         instance.is_active = True
         user_modified = True
