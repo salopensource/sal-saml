@@ -24,7 +24,7 @@ To take advantage of this, edit the settings.py that comes with sal-saml for the
 - `SAML_GROUPS_ATTRIBUTE`: Default (`memberOf`) The assertion dict's key for the group membership attribute.
 - `SAML_READ_ONLY_GROUPS`: Default `[]` (empty list) List of groups who should be given read-only access.
 - `SAML_READ_WRITE_GROUPS`: Default `[]` (empty list) List of groups who should be given read-write access.
-- `SAML_GLOBAL_ADMIN_GROUPS` Default `[]` (empty list) List of groups who should be given global admin access.
+- `SAML_GLOBAL_ADMIN_GROUPS` Default `[]` (empty list) List of groups who should be given global admin access. This includes access to the admin site.
 
 For example:
 ```
