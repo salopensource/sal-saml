@@ -10,7 +10,7 @@ fi
 if [ "$2" != "" ]; then
     BRANCH="$2"
 else
-    BRANCH="master"
+    BRANCH="main"
 fi
 
 URL="https://circleci.com/api/v1.1/project/github/salopensource/sal-saml/tree/${BRANCH}"
