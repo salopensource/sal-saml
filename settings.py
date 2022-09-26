@@ -19,6 +19,16 @@ SAML_ATTRIBUTE_MAPPING = {
     'sn': ('last_name', ),
 }
 
+# Edit these lists to include the names of groups that should get
+# the access levels below. See server/signals.py for more details.
+# Leave blank to disable the group-based permissions feature.
+SAML_READ_ONLY_GROUPS = []
+SAML_READ_WRITE_GROUPS = []
+SAML_GLOBAL_ADMIN_GROUPS = []
+# Edit to match the attribute name used in your SAML assertions for
+# group membership information.
+SAML_GROUPS_ATTRIBUTE = 'memberOf'
+
 logging_config = get_sal_logging_config()
 level = 'DEBUG' if DEBUG == True else 'ERROR'
 logging_config['loggers']['djangosaml2'] = {
@@ -92,8 +102,10 @@ SAML_CONFIG = {
   # directory with attribute mapping
   'attribute_map_dir': path.join(BASEDIR, 'attributemaps'),
 
-  # this block states what services we provide
+  # Allow SAML assertions to contain attributes not specified in the
+  # attributemaps.
   'allow_unknown_attributes': True,
+  # this block states what services we provide
   'service': {
       # we are just a lonely SP
       'sp' : {
@@ -104,7 +116,7 @@ SAML_CONFIG = {
           'name': 'Federated Django sample SP',
           'name_id_format': NAMEID_FORMAT_PERSISTENT,
           'endpoints': {
-              # url and binding to the assetion consumer service view
+              # url and binding to the assertion consumer service view
               # do not change the binding or service name
               'assertion_consumer_service': [
                   ('https://sal.example.com/saml2/acs/',

@@ -25,10 +25,9 @@ RUN pip install djangosaml2==0.18.1
 ADD attributemaps /home/app/sal/sal/attributemaps
 RUN mv /home/app/sal/sal/urls.py /home/app/sal/sal/origurls.py
 ADD urls.py /home/app/sal/sal/urls.py
-
-""".format(
-    tag
-)
+ADD apps.py /home/app/sal/server/apps.py
+ADD signals.py /home/app/sal/server/signals.py
+""".format(tag)
 
 with open("Dockerfile", "w") as dockerfile:
     dockerfile.write(dockerfile_content)
