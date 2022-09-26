@@ -33,7 +33,7 @@ logging_config = get_sal_logging_config()
 level = 'DEBUG' if DEBUG == True else 'ERROR'
 logging_config['loggers']['djangosaml2'] = {
     'propagate': False, 'handlers': ['console'], 'level': level}
-update_sal_loggin_config(logging_config)
+update_sal_logging_config(logging_config)
 
 
 INSTALLED_APPS += ('djangosaml2',)
