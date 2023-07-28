@@ -174,6 +174,5 @@ Okta has a slightly different implementation and a few of the tools that this co
     ```
 
 # Help
-
 For more information on what to put in your settings.py, look at https://github.com/knaperek/djangosaml2
 Also, swing by the #sal channel on the MacAdmins slack team (https://macadmins.org/)
