@@ -19,7 +19,7 @@ _The following instructions are provided as a best effort to help get started. T
 
 ## An example Docker run
 
-Please note that this docker run is **incomplete**, but shows where to pass the `metadata.xml` and `settings.py`. Also note, `latest` in the below run should not be used unless you have a real reason (needing a development version). When performing `docker run`, you should substitute `latest` for the latest tagged release.
+Please note that this Docker run is **incomplete**, but shows where to pass the `metadata.xml` and `settings.py`. Also note, `latest` in the below run should not be used unless you have a real reason (needing a development version). When performing `docker run`, you should substitute `latest` for the latest tagged release.
 
 ```bash
 docker run -d --name="sal" \
@@ -53,27 +53,30 @@ macadmins/sal-saml:latest
     | urn:mace:dir:attribute-def:mail | Email           |
     | urn:mace:dir:attribute-def:uid  | Email name part |
 
-1. Under the "SSO" tab, download the "Issuer URL" metadata file. This will be mounted in your docker container [(see above)](#an-example-docker-run).
+1. Under the "SSO" tab, download the "Issuer URL" metadata file. This will be mounted in your Docker container [(see above)](#an-example-Docker-run).
 1. Under the "SSO" tab, you will find the "SAML 2.0 Endpoint" and "SLO Endpoint" which will go into the `settings.py` > `idp` section.
 1. Lastly, "Save" the SAML Test Connector (IdP).
 
 ## Notes on Okta
 Okta has a slightly different implementation and a few of the tools that this container uses, specifically [`pysaml2`](https://github.com/rohe/pysaml2) and [`djangosaml2`](https://github.com/knaperek/djangosaml2), do not like this implementation by default. Please follow the setup instructions, make sure to replace the example URL:
 1. Create a new app from the admin portal
-
-    Platform: Web
-    Sign on method: SAML 2.0
-
+    - Platform: Web
+    - Sign on method: SAML 2.0
 1. Under "General Settings", give the app a name, add a logo and modify app visibility as desired.
 1. Under "Configure SAML" enter the following (if no value is given after the colon leave it blank):
 
     #### General
 
     Single sign on URL: **https://sal.example.com/saml2/acs/**
+
     Use this for Recipient URL and Destination URL: **Checked**
+
     Allow this app to request other SSO URLs: **Unchecked** (If this option is available)
+
     Audience URI (SP Entity ID): **https://sal.example.com/saml2/metadata/**
+
     Default RelayState: **Unspecified**
+
     Application username: **Okta username**
 
     #### Attribute Statements
@@ -89,20 +92,19 @@ Okta has a slightly different implementation and a few of the tools that this co
 
     Sal does not support these at this time.
 1. Under "Feedback":
+    - Are you a customer or partner? I'm an Okta customer adding an internal app
+    - App type: This is an internal app that we have created
 
-    Are you a customer or partner? I'm an Okta customer adding an internal app
-    App type: This is an internal app that we have created
+1. Download the metadata file from: "Sign On" tab > "Settings" > "SAML 2.0" > "Metadata details" > "Metadata URL" link
+    * Rename the file to `metadata.xml` to match the Docker run example. Make sure to move this file to the correct location on your Docker host.
 
-1. Download the metadata file from: "Sign On" tab > Settings > SAML 2.0 > "Identity Provider metadata" link
-    * Rename the file to `metadata.xml` to match the docker run example. Make sure to move this file to the correct location on your docker host.
-
-1. Under "Sign On" tab > Settings > SAML 2.0 > "View Setup Instructions", you will find the "Identity Provider Single Sign-On URL" and "Identity Provider Issuer" which will go into the `settings.py` > `idp` section.
+1. Under "Sign On" tab > "Settings > "SAML 2.0" > "Metadata details" > "More details", you will find the "Sign on URL" and "Issuer" which will go into the `settings.py` > `idp` section.
 
 ## Notes on Google
 1. In the Google admin console click on Apps > SAML Apps.
 1. Click the `+` (plus) button > Setup My Own Custon App.
 1. Under the "Option 1" section, you will find the "SSO URL" which will go into the `settings.py` > `idp` section.
-1. Under the "Option 2" section, download the "IDP metadata" metadata file. This will be mounted in your docker container [(see above)](#an-example-docker-run).
+1. Under the "Option 2" section, download the "IDP metadata" metadata file. This will be mounted in your Docker container [(see above)](#an-example-Docker-run).
 1. Give the application a display name, upload a icon if you wish, and then click Next.
 1. In the "Service Provider Details" pane, you will need at least the minimum settings shown below:
     * `ACS (Consumer) URL`: https://sal.example.com/saml2/acs/
