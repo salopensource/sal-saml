@@ -17,7 +17,7 @@ if tag == "":
 dockerfile_content = """FROM macadmins/sal:{}
 MAINTAINER Graham Gilbert <graham@grahamgilbert.com>
 
-RUN apt-get update && apt-get install -y python-setuptools python-dev libxmlsec1-dev libxml2-dev xmlsec1 python-pip
+RUN apt-get update && apt-get install -y python3-setuptools python3-dev libxmlsec1-dev libxml2-dev xmlsec1 python3-pip
 RUN pip install -U setuptools
 RUN pip install djangosaml2==0.18.1
 
