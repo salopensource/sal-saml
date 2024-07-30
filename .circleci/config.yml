@@ -16,7 +16,7 @@ jobs:
       # - run: source $BASH_ENV; docker push macadmins/sal-saml:$TAG
 
 workflows:
-  version: 3
+  version: 2
   build_and_test:
     jobs:
       - build
