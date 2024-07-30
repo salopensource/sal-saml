@@ -8,7 +8,7 @@ jobs:
       - checkout
       - setup_remote_docker
       - run: apk update
-      - run: apk add python2
+      - run: apk add python3
       # - run: echo ${TAG}; if [ -z ${TAG+x} ]; then TAG=$CIRCLE_BRANCH; fi; if [ $TAG=="main" ]; then TAG="latest"; fi; echo export TAG=\"$TAG\" >> $BASH_ENV; source $BASH_ENV; echo $BASH_ENV
       - run: export PYTHONUNBUFFERED=1; python process_build.py $TAG
       # - run: source $BASH_ENV; docker build -t macadmins/sal-saml:$TAG .
@@ -16,7 +16,7 @@ jobs:
       # - run: source $BASH_ENV; docker push macadmins/sal-saml:$TAG
 
 workflows:
-  version: 2
+  version: 3
   build_and_test:
     jobs:
       - build
