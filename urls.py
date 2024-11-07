@@ -5,6 +5,5 @@ from django.conf.urls.static import static
 from sal.origurls import *
 
 urlpatterns += [
-
     url(r'^saml2/', include('djangosaml2.urls')),
 ]
